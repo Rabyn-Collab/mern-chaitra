@@ -70,6 +70,10 @@ nav a:hover {
   margin: var(--coMargin) 0;
 }
 
+.pro-image {
+  margin-bottom: 10px;
+}
+
 .dis-info {
   margin-top: 120px;
   text-align: center;
