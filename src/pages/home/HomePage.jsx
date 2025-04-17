@@ -8,13 +8,13 @@ export default function HomePage() {
   return (
     <div>
       <Header />
-
+      {/* 
       <div className='flex-center'>
         <h1>hello</h1>
         <div className='h-[100px] w-[100px] bg-red-700'>
 
         </div>
-      </div>
+      </div> */}
 
       {/* <h1>hello jee</h1>
       <h2>sello jee</h2>
