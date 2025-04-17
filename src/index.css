@@ -2,7 +2,64 @@
 @import "tailwindcss";
 
 
+@theme {
+  /* --color-*: initial;
+  --color-red: red;
+  --color-blue: blue;
+  --color-green: green;
+  --color-purple: purple; */
+  --gridCol: repeat(auto-fit, minmax(300px, 1fr));
+  --text-ng: 40px;
+  --spacing-fort: 50px;
+
+  --animate-changeColor: ani 1s linear infinite;
+
+  @keyframes ani {
+    10% {
+      color: red;
+    }
+
+    50% {
+      color: blue;
+    }
+  }
+}
+
+
 /* 
 body {
   font-family: "Lato", sans-serif;
 } */
+
+.btn {
+  @apply text-white px-4 m-2 py-1 rounded-sm;
+}
+
+.bx {
+  transition: all 2s ease-in 0s;
+}
+
+
+@layer base {
+  h1 {
+    @apply text-2xl font-bold;
+  }
+
+  h2 {
+    @apply text-xl font-semibold;
+  }
+
+  p {
+    @apply text-lg;
+  }
+}
+
+@layer components {
+  .card {
+    @apply border-[1px] shadow-2xl bg-white p-5;
+  }
+}
+
+@utility flex-center {
+  @apply flex gap-3 justify-center;
+}
