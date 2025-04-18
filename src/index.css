@@ -14,6 +14,8 @@
 
   --animate-changeColor: ani 1s linear infinite;
 
+  --clipPath: polygon(99% 49%, 0 100%, 100% 100%);
+
   @keyframes ani {
     10% {
       color: red;
@@ -32,6 +34,7 @@ body {
 } */
 
 .btn {
+
   @apply text-white px-4 m-2 py-1 rounded-sm;
 }
 
