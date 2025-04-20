@@ -5,21 +5,32 @@ import { RouterProvider } from 'react-router-dom';
 import About from './pages/about/About';
 import Contact from './pages/contact/Contact';
 
+import RootLayout from './components/RootLayout';
+
 export default function App() {
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Home />
+      element: <RootLayout />,
+      children: [
+
+        {
+          index: true,
+          element: <Home />
+        },
+        {
+          path: 'about',
+          element: <About />
+        },
+        {
+          path: 'contact',
+          element: <Contact />
+        }
+
+      ]
     },
-    {
-      path: 'about',
-      element: <About />
-    },
-    {
-      path: 'contact',
-      element: <Contact />
-    }
+
 
   ]);
 
