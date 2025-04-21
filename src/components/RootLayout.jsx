@@ -5,13 +5,13 @@ import Footer from './Footer'
 
 export default function RootLayout() {
   return (
-    <div className='flex flex-col bg-gray-600'>
+    <div className='flex flex-col min-h-screen'>
       <Header />
-      <main className=''>
+      <main className='flex-grow'>
         <Outlet />
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

@@ -6,6 +6,7 @@ import About from './pages/about/About';
 import Contact from './pages/contact/Contact';
 
 import RootLayout from './components/RootLayout';
+import NotFound from './pages/not-found/NotFound';
 
 export default function App() {
 
@@ -26,6 +27,10 @@ export default function App() {
         {
           path: 'contact',
           element: <Contact />
+        },
+        {
+          path: '*',
+          element: <NotFound />
         }
 
       ]
