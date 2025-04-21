@@ -55,6 +55,10 @@ body {
   p {
     @apply text-lg;
   }
+
+  img {
+    width: 100%;
+  }
 }
 
 @layer components {
