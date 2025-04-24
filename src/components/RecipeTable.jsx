@@ -32,16 +32,16 @@ const TABLE_ROWS = [
 
 export function RecipeTable({ ingres, intructs }) {
 
-  const mergerArray = [...ingres, ...intructs];
+
 
   return (
-    <Card className="h-full w-full overflow-scroll">
-      <table className="w-full min-w-max table-auto text-left">
-        <thead>
-          <tr>
-            {TABLE_HEAD.map((head) => (
+    <div className="flex gap-5">
+      <Card className="h-full w-full overflow-scroll">
+        <table className="w-full table-auto text-left">
+          <thead>
+            <tr>
+
               <th
-                key={head}
                 className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
               >
                 <Typography
@@ -49,34 +49,93 @@ export function RecipeTable({ ingres, intructs }) {
                   color="blue-gray"
                   className="font-normal leading-none opacity-70"
                 >
-                  {head}
+                  Ingredients
                 </Typography>
               </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {mergerArray.map((merg, index) => {
-            const isLast = index === mergerArray.length - 1;
-            const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
-            return (
-              <tr key={merg}>
-                <td className={classes}>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal"
-                  >
-                    {merg}
-                  </Typography>
-                </td>
+            </tr>
+          </thead>
+          <tbody>
+            {ingres.map((value, index) => {
+              const isLast = index === ingres.length - 1;
+              const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </Card>
+              return (
+                <tr key={index}>
+
+
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {value}
+
+                    </Typography>
+                  </td>
+
+
+
+                </tr>
+              );
+            })}
+          </tbody>
+
+
+
+        </table>
+      </Card>
+      <Card className="h-full w-full overflow-scroll">
+        <table className="w-full table-auto text-left">
+          <thead>
+            <tr>
+
+              <th
+                className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+              >
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="font-normal leading-none opacity-70"
+                >
+                  Instructions
+                </Typography>
+              </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {intructs.map((value, index) => {
+              const isLast = index === intructs.length - 1;
+              const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+
+              return (
+                <tr key={index}>
+
+
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {value}
+
+                    </Typography>
+                  </td>
+
+
+
+                </tr>
+              );
+            })}
+          </tbody>
+
+
+
+        </table>
+      </Card>
+    </div>
   );
 }

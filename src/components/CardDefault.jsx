@@ -9,8 +9,8 @@ import { RecipeTable } from "./RecipeTable";
 
 export function CardDefault({ recipe }) {
   return (
-    <Card className="mt-6 w-96">
-      <CardHeader color="blue-gray" className="relative h-56">
+    <Card className="mt-6 max-w-[550px]">
+      <CardHeader color="blue-gray" className="relative ">
         <img
           src={recipe.image}
           alt="card-image"
