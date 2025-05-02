@@ -1,52 +1,70 @@
-import { faker } from '@faker-js/faker';
-import { Button, IconButton, Typography } from '@material-tailwind/react';
-import React, { useState } from 'react'
+import { Card, CardBody, CardHeader } from '@material-tailwind/react';
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router';
 
 export default function Home() {
 
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
-  const [users, setUsers] = useState([]);
+  const nav = useNavigate();
 
-  const handleUser = () => {
-    const user = {
-      userId: faker.string.uuid(),
-      username: faker.internet.username(),
-      email: faker.internet.email(),
-      avatar: faker.image.avatar(),
-    };
-    setUsers((prev) => [...prev, user]);
+  const getData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get('https://www.themealdb.com/api/json/v1/1/categories.php');
+      setLoading(false);
+      setData(response.data);
+      console.log(data);
+    } catch (err) {
+      setLoading(false);
+      setError(err.message)
+    }
+
   }
 
-  const removeUser = (userId) => {
-    setUsers((prev) => prev.filter((user) => user.userId !== userId));
+  useEffect(() => {
+    getData();
+  }, []);
+
+
+  if (loading) {
+
+    return <h1>Loading...</h1>
   }
 
+  if (error) {
+    return <h1>{error}</h1>
+  }
 
   return (
-    <div>
-      <div className='sticky top-0 bg-amber-100 p-3'>
-        <Button onClick={handleUser} color='purple'>Add User</Button>
-      </div>
+    <div className='p-5 '>
+      <div className='grid grid-cols-4 gap-x-6 gap-y-14 mt-7'>
+        {data && data.categories.map((category) => {
+          return <Card
+            onClick={() => nav(`/meal-items/${category.strCategory}`)}
+            key={category.idCategory} className='cursor-pointer'>
+            <CardHeader>
+              <img src={category.strCategoryThumb} alt="" />
 
-      <div className='grid grid-cols-5 gap-10 p-5'>
-
-
-        {users.map((user) => {
-          return <div key={user.userId} className='mt-5 space-y-2'>
-            <img className='h-[200px] w-full object-cover' src={user.avatar} alt="" />
-            <Typography variant='h5'>{user.username}</Typography>
-            <div className='flex justify-between flex-wrap gap-3'>
-              <p>{user.email}</p>
-              <IconButton onClick={() => removeUser(user.userId)} color='pink' size='sm' >
-                <i className='fas fa-trash'></i>
-              </IconButton>
-            </div>
+            </CardHeader>
 
 
-          </div>
+            <CardBody>
+              <h1>{category.strCategory}</h1>
+            </CardBody>
+
+
+
+
+          </Card>
+
 
         })}
       </div>
+
 
 
 
