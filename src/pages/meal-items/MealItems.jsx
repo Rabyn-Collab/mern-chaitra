@@ -1,39 +1,16 @@
 import { Avatar, Card, List, ListItem, ListItemPrefix, Typography } from '@material-tailwind/react';
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router';
+import { useApiHooks } from '../../hooks/apiHooks';
 
 export default function MealItems() {
 
   const { category } = useParams();
-
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
-
   const nav = useNavigate();
 
-  const getData = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get('https://www.themealdb.com/api/json/v1/1/filter.php', {
-        params: {
-          c: category
-        }
-      });
-      setLoading(false);
-      setData(response.data);
-      console.log(data);
-    } catch (err) {
-      setLoading(false);
-      setError(err.message)
-    }
-
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const [data, loading, error] = useApiHooks(
+    'https://www.themealdb.com/api/json/v1/1/filter.php',
+    { c: category }
+  );
 
 
   if (loading) {

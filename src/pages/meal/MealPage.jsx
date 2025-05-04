@@ -1,37 +1,15 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router'
+import { useApiHooks } from '../../hooks/apiHooks';
 
 export default function MealPage() {
   const { id } = useParams();
 
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
 
-
-
-  const getData = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get('https://www.themealdb.com/api/json/v1/1/lookup.php', {
-        params: {
-          i: id
-        }
-      });
-      setLoading(false);
-      setData(response.data);
-      console.log(data);
-    } catch (err) {
-      setLoading(false);
-      setError(err.message)
-    }
-
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const [data, loading, error] = useApiHooks(
+    'https://www.themealdb.com/api/json/v1/1/lookup.php',
+    { i: id }
+  );
 
 
   if (loading) {
