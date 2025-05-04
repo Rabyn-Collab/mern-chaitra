@@ -5,6 +5,7 @@ import { RouterProvider } from 'react-router-dom';
 import RootLayout from './components/RootLayout';
 import NotFound from './pages/not-found/NotFound';
 import MealItems from './pages/meal-items/MealItems';
+import MealPage from './pages/meal/MealPage';
 
 export default function App() {
 
@@ -17,7 +18,10 @@ export default function App() {
           index: true,
           element: <Home />
         },
-
+        {
+          path: 'meal/:id',
+          element: <MealPage />
+        },
         {
           path: 'meal-items/:category',
           element: <MealItems />

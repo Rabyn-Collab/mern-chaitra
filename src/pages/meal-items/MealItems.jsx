@@ -53,7 +53,9 @@ export default function MealItems() {
         <List>
 
           {data?.meals.map((meal) => {
-            return <ListItem key={meal.idMeal} className='cursor-pointer'>
+            return <ListItem
+              onClick={() => nav(`/meal/${meal.idMeal}`)}
+              key={meal.idMeal} className='cursor-pointer'>
               <ListItemPrefix>
                 <Avatar variant="circular" alt="candice" src={meal.strMealThumb} />
               </ListItemPrefix>
