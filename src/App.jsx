@@ -1,12 +1,8 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router'
-import Home from './pages/home/Home';
 import { RouterProvider } from 'react-router-dom';
 import RootLayout from './components/RootLayout';
-import NotFound from './pages/not-found/NotFound';
-import MealItems from './pages/meal-items/MealItems';
-import MealPage from './pages/meal/MealPage';
-import RandomMeal from './pages/random/RandomMeal';
+import HomePage from './pages/home/HomePage';
 
 export default function App() {
 
@@ -17,24 +13,9 @@ export default function App() {
       children: [
         {
           index: true,
-          element: <Home />
+          element: <HomePage />
         },
-        {
-          path: 'random-meal',
-          element: <RandomMeal />
-        },
-        {
-          path: 'meal/:id',
-          element: <MealPage />
-        },
-        {
-          path: 'meal-items/:category',
-          element: <MealItems />
-        },
-        {
-          path: '*',
-          element: <NotFound />
-        }
+
 
       ]
     },
