@@ -6,6 +6,7 @@ import RootLayout from './components/RootLayout';
 import NotFound from './pages/not-found/NotFound';
 import MealItems from './pages/meal-items/MealItems';
 import MealPage from './pages/meal/MealPage';
+import RandomMeal from './pages/random/RandomMeal';
 
 export default function App() {
 
@@ -17,6 +18,10 @@ export default function App() {
         {
           index: true,
           element: <Home />
+        },
+        {
+          path: 'random-meal',
+          element: <RandomMeal />
         },
         {
           path: 'meal/:id',
