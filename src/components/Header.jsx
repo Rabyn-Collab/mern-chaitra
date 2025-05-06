@@ -9,11 +9,12 @@ export default function Header() {
 
       <nav className='space-x-7 max-sm:hidden'>
         <NavLink
+          to={'/add-user'}
           className={(e) => {
             return e.isActive ? 'text-red-700' : 'hover:bg-white hover:text-black ';
           }}
-        >About</NavLink>
-        <NavLink to={'/contact'}>Contact</NavLink>
+        >AddUser</NavLink>
+
       </nav>
 
     </div>
