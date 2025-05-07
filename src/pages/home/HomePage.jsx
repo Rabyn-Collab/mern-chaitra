@@ -8,7 +8,7 @@ export default function HomePage() {
 
   const { users } = useSelector((state) => state.userSlice);
 
-  console.log(users);
+
   return (
     <div className='p-5'>
 
