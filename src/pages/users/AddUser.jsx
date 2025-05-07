@@ -2,6 +2,9 @@ import React from 'react'
 import { Button, Checkbox, Input, Option, Radio, Select, Textarea, Typography } from '@material-tailwind/react'
 import { Formik } from 'formik'
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { addUser } from './userSlice';
+import { useNavigate } from 'react-router';
 
 
 const valSchema = Yup.object({
@@ -13,6 +16,9 @@ const valSchema = Yup.object({
 });
 
 export default function AddUser() {
+  const dispatch = useDispatch();
+  const nav = useNavigate();
+
   return (
     <div className='p-5 max-w-[450px] mt-5'>
 
@@ -27,7 +33,8 @@ export default function AddUser() {
         }}
 
         onSubmit={(val) => {
-          console.log(val);
+          dispatch(addUser(val));
+          nav(-1);
         }}
 
         validationSchema={valSchema}
