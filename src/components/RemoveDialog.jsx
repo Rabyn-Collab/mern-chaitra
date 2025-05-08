@@ -23,7 +23,7 @@ export default function RemoveDialog({ index }) {
       </IconButton>
 
 
-      <Dialog open={open} handler={handleOpen}>
+      <Dialog open={open} handler={handleOpen} className="">
         <DialogHeader>Its a simple dialog.</DialogHeader>
         <DialogBody>
           The key to more success is to have a lot of pillows. Put it this way,
