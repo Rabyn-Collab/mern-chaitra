@@ -1,22 +1,19 @@
 import React from 'react'
 import { Button, Checkbox, Input, Option, Radio, Select, Textarea, Typography } from '@material-tailwind/react'
 import { Formik } from 'formik'
-import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { addUser } from './userSlice';
-import { useNavigate } from 'react-router';
-import { nanoid } from '@reduxjs/toolkit';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
+import { valSchema } from './AddUser';
+import { updateUser } from './userSlice';
 
 
-export const valSchema = Yup.object({
-  username: Yup.string().min(5).required(),
-  gender: Yup.string().required(),
-  habits: Yup.array().min(1).required(),
-  country: Yup.string().required(),
-  message: Yup.string().min(10).max(200).required()
-});
+export default function UpdateUser() {
+  const { id } = useParams();
+  const { users } = useSelector((state) => state.userSlice);
 
-export default function AddUser() {
+  const user = users.find((user) => user.id === id);
+
   const dispatch = useDispatch();
   const nav = useNavigate();
 
@@ -24,17 +21,16 @@ export default function AddUser() {
     <div className='p-5 max-w-[450px] mt-5'>
 
       <Formik
-
         initialValues={{
-          username: '',
-          gender: '',
-          habits: [],
-          country: '',
-          message: ''
+          username: user?.username,
+          gender: user?.gender,
+          habits: user?.habits,
+          country: user?.country,
+          message: user.message
         }}
 
         onSubmit={(val) => {
-          dispatch(addUser({ ...val, id: nanoid() }));
+          dispatch(updateUser({ ...val, id: id }));
           nav(-1);
         }}
 
@@ -65,11 +61,13 @@ export default function AddUser() {
                   name="gender"
                   label="Male"
                   value={'male'}
+                  checked={values.gender === 'male'}
                   color='red' />
                 <Radio
                   onChange={handleChange}
                   name="gender"
                   label="Female"
+                  checked={values.gender === 'female'}
                   value={'female'}
                   color='purple' />
               </div>
@@ -87,17 +85,20 @@ export default function AddUser() {
                   color="blue"
                   onChange={handleChange}
                   name='habits'
+                  checked={values.habits.includes('Singing')}
                   label='Singing' />
                 <Checkbox
                   onChange={handleChange}
                   value={'Dancing'}
                   color="red"
                   name='habits'
+                  checked={values.habits.includes('Dancing')}
                   label='Dancing' />
                 <Checkbox
                   onChange={handleChange}
                   name='habits'
                   value={'Coding'}
+                  checked={values.habits.includes('Coding')}
                   color="green" label='Coding' />
 
               </div>
@@ -106,6 +107,7 @@ export default function AddUser() {
 
             <div>
               <Select
+                value={values.country}
                 name='country'
                 onChange={(e) => setFieldValue('country', e)}
                 label="Select Your Country">

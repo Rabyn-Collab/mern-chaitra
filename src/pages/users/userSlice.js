@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUsersFromLocal, setToLocal } from "../../local/local";
+import { getUsersFromLocal, removeFromLocal, setToLocal } from "../../local/local";
 
 
 export const userSlice = createSlice({
@@ -15,12 +15,19 @@ export const userSlice = createSlice({
     },
 
     updateUser: (state, action) => {
+      state.users = state.users.map((user) => action.payload.id === user.id ? action.payload : user);
+      setToLocal(state.users);
 
     },
 
     removeUser: (state, action) => {
       state.users.splice(action.payload, 1);
       setToLocal(state.users);
+    },
+
+    removeAll: (state, action) => {
+      state.users = [];
+      removeFromLocal();
     }
 
 
@@ -30,4 +37,4 @@ export const userSlice = createSlice({
 
 });
 
-export const { addUser, updateUser, removeUser } = userSlice.actions;
+export const { addUser, updateUser, removeUser, removeAll } = userSlice.actions;

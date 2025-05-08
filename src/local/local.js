@@ -12,6 +12,7 @@ export const setToLocal = (users) => {
 
 
 export const removeFromLocal = () => {
+  localStorage.clear();
 
 }
 

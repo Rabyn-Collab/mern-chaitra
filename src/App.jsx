@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router-dom';
 import RootLayout from './components/RootLayout';
 import HomePage from './pages/home/HomePage';
 import AddUser from './pages/users/AddUser';
+import UpdateUser from './pages/users/UpdateUser';
 
 export default function App() {
 
@@ -19,6 +20,10 @@ export default function App() {
         {
           path: 'add-user',
           element: <AddUser />
+        },
+        {
+          path: 'update-user/:id',
+          element: <UpdateUser />
         },
 
 
