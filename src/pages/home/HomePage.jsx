@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Card, CardBody, Typography, Avatar, IconButton } from "@material-tailwind/react";
+import RemoveDialog from '../../components/RemoveDialog';
 
 
 
@@ -50,9 +51,8 @@ export default function HomePage() {
                     <IconButton color='green' size='sm'>
                       <i className="fas fa-edit" />
                     </IconButton>
-                    <IconButton color='pink' size='sm'>
-                      <i className="fas fa-trash" />
-                    </IconButton>
+                    <RemoveDialog index={index} />
+
                   </div>
                 </div>
 
