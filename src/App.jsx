@@ -2,9 +2,8 @@ import React from 'react'
 import { createBrowserRouter } from 'react-router'
 import { RouterProvider } from 'react-router-dom';
 import RootLayout from './components/RootLayout';
-import HomePage from './pages/home/HomePage';
-import AddUser from './pages/users/AddUser';
-import UpdateUser from './pages/users/UpdateUser';
+import CommentList from './features/comments/CommentList';
+
 
 export default function App() {
 
@@ -13,18 +12,8 @@ export default function App() {
       path: '/',
       element: <RootLayout />,
       children: [
-        {
-          index: true,
-          element: <HomePage />
-        },
-        {
-          path: 'add-user',
-          element: <AddUser />
-        },
-        {
-          path: 'update-user/:id',
-          element: <UpdateUser />
-        },
+
+        { index: true, element: <CommentList /> }
 
 
       ]
