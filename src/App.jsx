@@ -1,8 +1,7 @@
 import { createBrowserRouter } from 'react-router'
 import { RouterProvider } from 'react-router-dom';
 import RootLayout from './components/RootLayout';
-import CommentList from './features/comments/CommentList';
-import RecipeList from './features/recipes/RecipeList';
+import RecipeSearch from './features/recipes/RecipeSearch';
 
 
 export default function App() {
@@ -13,7 +12,7 @@ export default function App() {
       element: <RootLayout />,
       children: [
 
-        { index: true, element: <RecipeList /> },
+        { index: true, element: <RecipeSearch /> },
 
 
       ]
