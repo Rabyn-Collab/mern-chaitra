@@ -1,32 +1,18 @@
-import { Button } from '@material-tailwind/react';
-import { useGetAllRecipesQuery, useLazyGetAllRecipesQuery } from './recipeApi'
+import { useNavigate } from 'react-router'
 import { Image, Shimmer } from 'react-shimmer'
 
-export default function RecipeList() {
+export default function RecipeList({ data }) {
 
-  const [getRecipes, { isLoading, data }] = useLazyGetAllRecipesQuery();
-
-
-
-  // const { isLoading, error, data } = useGetAllRecipesQuery();
-
-  // if (isLoading) return <p>Loading...</p>
-  // if (error) return <p>{error}</p>
-
-
-
-  // console.log(data);
-
-  const handleRecipe = () => {
-    getRecipes();
-  }
-
+  const nav = useNavigate();
   return (
-    <div className='p-5'>
-      <Button loading={isLoading} onClick={handleRecipe}>Get Recipes</Button>
-      <div className='grid grid-cols-4 gap-5 mt-5 '>
+    <div className=''>
+
+      <div className='grid grid-cols-4 gap-5 mt-4 '>
         {data && data.recipes.map((rec) => {
-          return <div key={rec.id}>
+          return <div
+            className='cursor-pointer'
+            onClick={() => nav(`/recipes/${rec.id}`)}
+            key={rec.id}>
             <Image
               src={rec.image} alt=""
               fadeIn

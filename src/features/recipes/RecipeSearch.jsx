@@ -1,26 +1,31 @@
 import { Input, Button } from "@material-tailwind/react";
 import { Formik } from "formik";
-import { useLazySearchRecipesQuery } from "./recipeApi";
-import { Image, Shimmer } from "react-shimmer";
+import toast from "react-hot-toast";
 
 
 
-export default function RecipeSearch() {
+export default function RecipeSearch({ searchRecipe, isFetching }) {
 
-  const [searchRecipe, { isLoading, data }] = useLazySearchRecipesQuery();
-  console.log(data);
 
   return (
-    <div className="p-5">
+    <div className="">
 
       <Formik
         initialValues={{
           search: ''
         }}
 
-        onSubmit={(val, { resetForm }) => {
-          searchRecipe(val.search);
-          resetForm();
+        onSubmit={async (val, { resetForm }) => {
+          try {
+            const response = await searchRecipe(val.search).unwrap();
+            resetForm();
+            if (response.recipes.length === 0) toast.error('No recipe found');
+          } catch (error) {
+
+            toast.error('Something went wrong');
+
+          }
+
 
         }}
       >
@@ -38,7 +43,7 @@ export default function RecipeSearch() {
                 }}
               />
               <Button
-                loading={isLoading}
+                loading={isFetching}
                 type="submit"
                 size="sm"
                 color={values.search ? "gray" : "gray"}
@@ -52,20 +57,7 @@ export default function RecipeSearch() {
         )}
       </Formik>
 
-      <div className='grid grid-cols-4 gap-5 mt-5 '>
-        {data && data.recipes.map((rec) => {
-          return <div key={rec.id}>
-            <Image
-              src={rec.image} alt=""
-              fadeIn
-              fallback={<Shimmer height={300} width={300} />}
-            />
-            <p>{rec.name}</p>
 
-          </div>
-        })}
-
-      </div>
 
 
     </div>

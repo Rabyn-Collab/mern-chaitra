@@ -2,6 +2,8 @@ import { createBrowserRouter } from 'react-router'
 import { RouterProvider } from 'react-router-dom';
 import RootLayout from './components/RootLayout';
 import RecipeSearch from './features/recipes/RecipeSearch';
+import Recipe from './features/recipes/Recipe';
+import HomePage from './features/home/HomePage';
 
 
 export default function App() {
@@ -12,7 +14,8 @@ export default function App() {
       element: <RootLayout />,
       children: [
 
-        { index: true, element: <RecipeSearch /> },
+        { index: true, element: <HomePage /> },
+        { path: 'recipes/:id', element: <Recipe /> },
 
 
       ]
