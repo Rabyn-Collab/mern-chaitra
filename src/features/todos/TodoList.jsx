@@ -22,28 +22,40 @@ export default function TodoList() {
           {data.map((todo) => {
             return (
               <ListItem key={todo.id}>
+
                 <div>
 
-                  <div className='flex justify-between'>
-                    <div>
-                      <Typography variant="h6" color="blue-gray">
-                        {todo.title}
-                      </Typography>
-                    </div>
-
+                  <div className='flex gap-28'>
+                    <Typography variant="h6" color="blue-gray">
+                      {todo.title}
+                    </Typography>
                     <TodoRemove id={todo.id} />
-
-
                   </div>
 
-                  <div className='flex justify-between items-center'>
+
+
+
+
+                  <div className='flex items-center'>
                     <Typography variant="small" color="gray" className="font-normal">
                       isCompleted
                     </Typography>
                     <TodoCheck todo={todo} />
                   </div>
 
+
                 </div>
+
+
+
+
+
+
+
+
+
+
+
 
               </ListItem>
             )

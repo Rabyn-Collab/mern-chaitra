@@ -27,16 +27,10 @@ export const todoApi = createApi({
     }),
 
     updateTodo: builder.mutation({
-      query: (query) => ({
-        url: `/todos/${query.id}`,
-        body: query.body,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-
-        },
-        method: 'PATCH'
+      query: (q) => ({
+        url: `/todos/${q.id}`,
+        body: q.body,
+        method: 'PUT'
       }),
       invalidatesTags: ['Todos']
     }),

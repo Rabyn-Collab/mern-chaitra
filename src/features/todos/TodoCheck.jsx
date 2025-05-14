@@ -1,4 +1,4 @@
-import { Checkbox } from '@material-tailwind/react'
+import { Checkbox, Spinner } from '@material-tailwind/react'
 import { useUpdateTodoMutation } from './todoApi'
 import toast from 'react-hot-toast';
 
@@ -8,14 +8,16 @@ export default function TodoCheck({ todo }) {
 
   const handleCheck = async () => {
     try {
+
       await updateTodo({
         id: todo.id,
         body: {
-          title: 'hello jee'
+          isCompleted: !todo.isCompleted
         }
       }).unwrap();
       toast.success('Todo updated successfully');
     } catch (err) {
+      console.log(err);
       toast.error('Something went wrong');
     }
   }
@@ -23,9 +25,9 @@ export default function TodoCheck({ todo }) {
   return (
     <div>
 
-      <Checkbox
+      {isLoading ? <Spinner /> : <Checkbox
         onChange={() => handleCheck()}
-        checked={todo.isCompleted} />
+        checked={todo.isCompleted} />}
 
     </div>
   )
