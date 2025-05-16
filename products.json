@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Men's Slim Fit Jeans",
+    "description": "Stylish slim fit jeans for daily wear.",
+    "image": "https://example.com/images/jeans1.jpg",
+    "price": 2999,
+    "category": "clothing",
+    "brand": "levis",
+    "rating": 4.5
+  },
+  {
+    "title": "Women's Sports Shoes",
+    "description": "Comfortable running shoes for women.",
+    "image": "https://example.com/images/shoes1.jpg",
+    "price": 3499,
+    "category": "clothing",
+    "brand": "puma",
+    "rating": 4.2
+  },
+  {
+    "title": "Wireless Earbuds",
+    "description": "High-quality sound with noise cancellation.",
+    "image": "https://example.com/images/earbuds.jpg",
+    "price": 5999,
+    "category": "tech",
+    "brand": "adidas",
+    "rating": 4.7
+  },
+  {
+    "title": "Face Serum Vitamin C",
+    "description": "Brightens skin and reduces dark spots.",
+    "image": "https://example.com/images/serum.jpg",
+    "price": 799,
+    "category": "beauty",
+    "brand": "lakme",
+    "rating": 4.3
+  },
+  {
+    "title": "Casual T-Shirt Pack",
+    "description": "Pack of 3 premium cotton T-shirts.",
+    "image": "https://example.com/images/tshirt_pack.jpg",
+    "price": 1499,
+    "category": "clothing",
+    "brand": "pantaloons",
+    "rating": 4.1
+  },
+  {
+    "title": "Home Decor LED Lamp",
+    "description": "Modern LED lamp for home decoration.",
+    "image": "https://example.com/images/lamp.jpg",
+    "price": 1999,
+    "category": "household",
+    "brand": "myntra",
+    "rating": 4.4
+  },
+  {
+    "title": "Men's Track Pants",
+    "description": "Breathable fabric track pants for gym and casual wear.",
+    "image": "https://example.com/images/track_pants.jpg",
+    "price": 1199,
+    "category": "clothing",
+    "brand": "puma",
+    "rating": 4.0
+  },
+  {
+    "title": "Bluetooth Smartwatch",
+    "description": "Track your fitness and calls on the go.",
+    "image": "https://example.com/images/smartwatch.jpg",
+    "price": 3999,
+    "category": "tech",
+    "brand": "adidas",
+    "rating": 4.6
+  },
+  {
+    "title": "Luxury Lipstick Set",
+    "description": "Set of 5 long-lasting lipsticks.",
+    "image": "https://example.com/images/lipstick.jpg",
+    "price": 999,
+    "category": "beauty",
+    "brand": "lakme",
+    "rating": 4.3
+  },
+  {
+    "title": "Premium Bedsheet Set",
+    "description": "Cotton bedsheet set with 2 pillow covers.",
+    "image": "https://example.com/images/bedsheet.jpg",
+    "price": 2499,
+    "category": "household",
+    "brand": "myntra",
+    "rating": 4.2
+  }
+]

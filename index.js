@@ -1,10 +1,19 @@
 import express from 'express';
 import morgan from 'morgan';
 import productRoutes from './routes/productRoutes.js';
-
+import mongoose
+  from 'mongoose';
 const app = express();
 
 
+mongoose.connect('mongodb+srv://facebookteams900:pass900@cluster0.siz9npg.mongodb.net/Shopy').then((val) => {
+  app.listen(5000, () => {
+    console.log('database connected and listening')
+  })
+
+}).catch((err) => {
+  console.log(err);
+})
 
 app.use(morgan('dev'));
 
@@ -18,6 +27,3 @@ app.get('/', (req, res) => {
 app.use(productRoutes);
 
 
-app.listen(5000, () => {
-  console.log('server is listening')
-})
