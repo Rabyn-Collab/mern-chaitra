@@ -1,1 +1,23 @@
-console.log('hello jee');
+import express from 'express';
+import morgan from 'morgan';
+import productRoutes from './routes/productRoutes.js';
+
+const app = express();
+
+
+
+app.use(morgan('dev'));
+
+app.get('/', (req, res) => {
+  return res.status(200).json({
+    message: 'Welcome to Backened'
+  })
+});
+
+
+app.use(productRoutes);
+
+
+app.listen(5000, () => {
+  console.log('server is listening')
+})
