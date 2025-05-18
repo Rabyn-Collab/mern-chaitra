@@ -1,4 +1,5 @@
 import Product from "../models/Product.js";
+import fs from 'fs';
 
 //all products query
 export const getAllProducts = async (req, res) => {
@@ -25,13 +26,51 @@ export const getSingleProduct = async (req, res) => {
 
 
 //create product
-export const addProduct = (req, res) => {
-  return res.status(200).json({ messgage: 'products' });
+export const addProduct = async (req, res) => {
+  const { title, description,
+    price, category,
+    brand, image } = req.body;
+  try {
+    await Product.create({
+      title,
+      description,
+      price,
+      category,
+      image,
+      brand
+    });
+    return res.status(200).json({ message: 'product successfully added' });
+  } catch (errors) {
+    fs.unlink(`./uploads${image}`, (err) => {
+      if (err) return res.status(400).json({ messgage: `${err}` });
+      return res.status(400).json({ messgage: `${errors}` });
+    })
+
+  }
 }
 
 //update product
-export const updateProduct = (req, res) => {
-  return res.status(200).json({ messgage: 'products' });
+export const updateProduct = async (req, res) => {
+  const { title, description, price, category, brand, image } = req.body ?? {};
+  const { id } = req.params;
+  try {
+    const isExist = await Product.findById(id);
+    if (!isExist) return res.status(400).json({ message: 'product does not exist' });
+    isExist.title = title || isExist.title;
+    isExist.description = description || isExist.description;
+    isExist.price = price || isExist.price;
+    isExist.category = category || isExist.category;
+    isExist.brand = brand || isExist.brand;
+    if (image) fs.unlink(`./uploads${isExist.image}`, (err) => {
+      if (err) return res.status(400).json({ messgage: `${err}` });
+    })
+    isExist.image = image || isExist.image;
+    await isExist.save();
+    return res.status(200).json({ message: 'product successfully updated' });
+  } catch (err) {
+    return res.status(400).json({ messgage: `${err}` });
+
+  }
 }
 
 
@@ -39,8 +78,13 @@ export const updateProduct = (req, res) => {
 export const removeProduct = async (req, res) => {
   const { id } = req.params;
   try {
-    await Product.findByIdAndDelete(id);
-    return res.status(200).json({ message: 'product successfully removed' });
+    const isExist = await Product.findById(id);
+    if (!isExist) return res.status(400).json({ message: 'product does not exist' });
+    fs.unlink(`./uploads${isExist.image}`, async (err) => {
+      if (err) return res.status(400).json({ messgage: `${err}` });
+      await Product.findByIdAndDelete(id);
+      return res.status(200).json({ message: 'product successfully removed' });
+    })
   } catch (err) {
     return res.status(400).json({ messgage: `${err}` });
 
