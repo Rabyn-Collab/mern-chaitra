@@ -1,12 +1,13 @@
-import React from 'react'
-import TodoList from '../todos/TodoList'
-import TodoInput from '../todos/TodoInput'
+import Login from "../users/Login.jsx";
+
 
 export default function HomePage() {
   return (
     <div className='p-5 space-y-5'>
-      <TodoInput />
-      <TodoList />
+
+
+      <Login />
+
 
     </div>
   )
