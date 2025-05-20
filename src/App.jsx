@@ -3,6 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import RootLayout from './components/RootLayout';
 import HomePage from './features/home/HomePage';
 import Register from './features/users/Register.jsx';
+import Login from './features/users/Login.jsx';
 
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
       children: [
 
         { index: true, element: <HomePage /> },
+        { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
 
       ]
