@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router'
 import { RouterProvider } from 'react-router-dom';
 import RootLayout from './components/RootLayout';
 import HomePage from './features/home/HomePage';
+import Register from './features/users/Register.jsx';
 
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
       children: [
 
         { index: true, element: <HomePage /> },
+        { path: 'register', element: <Register /> },
 
       ]
     },
