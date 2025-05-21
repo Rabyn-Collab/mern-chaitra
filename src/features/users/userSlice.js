@@ -18,9 +18,8 @@ export const userSlice = createSlice({
       setUsertoLocal(state.user);
     },
     removeUser: (state, action) => {
-      state = null;
+      state.user = null;
       removeUserFromLocal();
-
     }
 
   }

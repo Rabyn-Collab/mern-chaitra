@@ -17,42 +17,58 @@ import {
   PowerIcon,
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../features/users/userSlice.js";
+import { useNavigate } from "react-router";
 
 
 
 // profile menu component
-const profileMenuItems = [
+
+const adminMenu = [
   {
-    label: "My Profile",
+    label: "Profile",
     icon: UserCircleIcon,
   },
+
   {
-    label: "Edit Profile",
-    icon: Cog6ToothIcon,
-  },
-  {
-    label: "Inbox",
+    label: "Admin Panel",
     icon: InboxArrowDownIcon,
   },
-  {
-    label: "Help",
-    icon: LifebuoyIcon,
-  },
+
   {
     label: "Sign Out",
     icon: PowerIcon,
   },
 ];
-export default function ProfileMenu() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const userMenu = [
+  {
+    label: "Profile",
+    icon: UserCircleIcon,
+  },
+  {
+    label: "Carts",
+    icon: Cog6ToothIcon,
+  },
 
+  {
+    label: "Sign Out",
+    icon: PowerIcon,
+  },
+];
+
+export default function ProfileMenu({ user }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
+  const menuItems = user?.role === 'Admin' ? adminMenu : userMenu;
+  const dispatch = useDispatch();
+  const nav = useNavigate();
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
         <Button
           variant="text"
-          color="blue-gray"
+          // color="blue-gray"
           className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
         >
           <Avatar
@@ -70,12 +86,25 @@ export default function ProfileMenu() {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
-        {profileMenuItems.map(({ label, icon }, key) => {
-          const isLastItem = key === profileMenuItems.length - 1;
+        {menuItems.map(({ label, icon }, key) => {
+          const isLastItem = key === menuItems.length - 1;
           return (
             <MenuItem
               key={label}
-              onClick={closeMenu}
+              onClick={() => {
+                switch (label) {
+                  case "Sign Out":
+                    dispatch(removeUser());
+                    break;
+
+                  case "Admin Panel":
+                    nav('/admin-panel');
+                    break;
+
+                }
+
+                closeMenu();
+              }}
               className={`flex items-center gap-2 rounded ${isLastItem
                 ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
                 : ""

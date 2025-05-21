@@ -32,4 +32,6 @@ export const productApi = mainApi.injectEndpoints({
 
 
   })
-})
+});
+
+export const { useGetProductsQuery, useGetProductQuery } = productApi;

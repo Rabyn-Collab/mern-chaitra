@@ -4,6 +4,8 @@ import RootLayout from './components/RootLayout';
 import HomePage from './features/home/HomePage';
 import Register from './features/users/Register.jsx';
 import Login from './features/users/Login.jsx';
+import AdminPage from './features/admin/AdminPage.jsx';
+import ProductAdd from './features/admin/ProductAdd.jsx';
 
 
 export default function App() {
@@ -17,6 +19,9 @@ export default function App() {
         { index: true, element: <HomePage /> },
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
+
+        { path: 'admin-panel', element: <AdminPage /> },
+        { path: 'admin/add-product', element: <ProductAdd /> }
 
       ]
     },

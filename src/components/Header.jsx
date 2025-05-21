@@ -24,7 +24,7 @@ export default function Header() {
         </Typography>
 
 
-        {user ? <ProfileMenu /> : <Link to={'/login'}>
+        {user ? <ProfileMenu user={user} /> : <Link to={'/login'}>
           <Button size="sm" variant="text">
             <span>Log In</span>
           </Button>
