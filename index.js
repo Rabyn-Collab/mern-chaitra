@@ -20,6 +20,7 @@ mongoose.connect('mongodb+srv://facebookteams900:pass900@cluster0.siz9npg.mongod
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
+app.use(express.static('uploads'));
 
 app.use(fileUpload({
   limits: { fileSize: 5 * 1024 * 1024 },

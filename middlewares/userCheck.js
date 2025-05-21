@@ -14,3 +14,11 @@ export const userCheck = (req, res, next) => {
   return next();
 
 }
+
+
+
+export const adminCheck = (req, res, next) => {
+  if (req.role !== 'admin') return res.status(401).json({ message: 'you are not authorized' });
+  return next();
+
+}
