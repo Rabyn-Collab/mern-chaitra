@@ -1,45 +1,42 @@
 import { Button, Input, Option, Select, Textarea } from '@material-tailwind/react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { useCreateProductMutation } from '../products/productApi.js';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
+import { useGetProductQuery, useUpdateProductMutation } from '../products/productApi.js';
+import { baseUrl } from '../../app/mainApi.js';
+import { commonSchema } from './ProductAdd.jsx';
 
-export const commonSchema = {
-  title: Yup.string().required('Title is required'),
-  description: Yup.string().required('Description is required'),
-  price: Yup.number().required('Price is required'),
-  category: Yup.string().required('Category is required'),
-  brand: Yup.string().required('Brand is required'),
-}
-
-const productSchema = Yup.object().shape({
+const updateProductSchema = Yup.object().shape({
   ...commonSchema,
-  image: Yup.mixed().required('Image is required').test('fileType', 'Unsupported File Format', (value) => {
+  image: Yup.mixed().test('fileType', 'Unsupported File Format', (value) => {
+    console.log(value);
+    if (!value) return true;
     return ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'].includes(value.type);
   })
 })
 
-export default function ProductAdd() {
-
-  const [addProduct, { isLoading }] = useCreateProductMutation();
+export default function ProductUpdate() {
+  const { id } = useParams();
+  const { isLoading, error, data } = useGetProductQuery(id);
+  const [updateProduct, { isLoading: updateLoading }] = useUpdateProductMutation();
   const nav = useNavigate();
-
   const { user } = useSelector((state) => state.userSlice);
+  if (isLoading) return <h1>Loading...</h1>;
+  if (error) return <h1>{error}</h1>;
 
-  console.log(user);
   return (
     <div className='max-w-[450px]'>
       <Formik
         initialValues={{
-          title: '',
-          description: '',
+          title: data.title,
+          description: data.description,
           image: '',
-          price: '',
-          category: '',
-          brand: '',
-          imageReview: ''
+          price: data.price,
+          category: data.category,
+          brand: data.brand,
+          imageReview: data.image
 
         }}
 
@@ -50,10 +47,11 @@ export default function ProductAdd() {
           formData.append('price', Number(val.price));
           formData.append('category', val.category);
           formData.append('brand', val.brand);
-          formData.append('image', val.image);
+
 
           try {
-            await addProduct({ body: formData, token: user.token }).unwrap();
+            if (val.image) formData.append('image', val.image);
+            await updateProduct({ body: formData, token: user.token, id: data._id }).unwrap();
             toast.success('Product Added');
             nav(-1);
           } catch (err) {
@@ -62,7 +60,7 @@ export default function ProductAdd() {
 
         }}
 
-        validationSchema={productSchema}
+        validationSchema={updateProductSchema}
       >
         {({ handleSubmit, handleChange, values, errors, setFieldValue, touched }) => (
           <form onSubmit={handleSubmit} className='space-y-4'>
@@ -92,6 +90,7 @@ export default function ProductAdd() {
 
             <div>
               <Select
+                value={values.category}
                 onChange={(e) => setFieldValue('category', e)}
                 label='Category' name='category'>
 
@@ -107,6 +106,7 @@ export default function ProductAdd() {
             </div>
             <div>
               <Select
+                value={values.brand}
                 onChange={(e) => setFieldValue('brand', e)}
                 label='Brand' name='brand'>
                 <Option value="levis">Levis</Option>
@@ -143,11 +143,11 @@ export default function ProductAdd() {
                 type="file" label='select file' />
               {touched.image && errors.image && <p className='text-red-600'>{errors.image}</p>}
 
-              {!errors.image && values.imageReview && <img src={values.imageReview} className='h=[200px] w-[200px] object-cover mt-4' alt="" />}
+              {!errors.image && values.imageReview && <img src={`${values.image ? values.imageReview : baseUrl + data.image}`} className='h=[200px] w-[200px] object-cover mt-4' alt="" />}
             </div>
 
 
-            <Button loading={isLoading} type='submit'>Submit</Button>
+            <Button loading={updateLoading} type='submit'>Submit</Button>
 
 
           </form>

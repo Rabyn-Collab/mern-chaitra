@@ -2,9 +2,10 @@ import React from 'react'
 import { useGetProductsQuery } from '../products/productApi.js'
 import { Avatar, Button, Card, IconButton, Typography } from "@material-tailwind/react";
 import { baseUrl } from '../../app/mainApi.js';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import RemoveProduct from './RemoveProduct.jsx';
 
-const TABLE_HEAD = ["Product", "Price", "CreatedAt", "Edit", "Remove"];
+const TABLE_HEAD = ["Product", "Name", "Price", "CreatedAt", "Edit", "Remove"];
 
 const TABLE_ROWS = [
   {
@@ -35,6 +36,7 @@ const TABLE_ROWS = [
 ];
 export default function AdminPage() {
   const { isLoading, error, data } = useGetProductsQuery();
+  const nav = useNavigate();
   if (isLoading) return 'Loading...';
   if (error) return `${error}`;
 
@@ -69,7 +71,7 @@ export default function AdminPage() {
             </tr>
           </thead>
           <tbody>
-            {data.map(({ _id, image, price, createdAt }, index) => {
+            {data.map(({ _id, image, price, createdAt, title }, index) => {
               const isLast = index === TABLE_ROWS.length - 1;
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
@@ -77,6 +79,15 @@ export default function AdminPage() {
                 <tr key={_id}>
                   <td className={classes}>
                     <Avatar src={`${baseUrl}${image}`} />
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {title}
+                    </Typography>
                   </td>
                   <td className={classes}>
                     <Typography
@@ -97,15 +108,15 @@ export default function AdminPage() {
                     </Typography>
                   </td>
                   <td className={classes}>
-                    <IconButton color='green'>
+                    <IconButton
+                      onClick={() => nav(`/admin/edit-product/${_id}`)}
+                      color='green'>
                       <i className="fas fa-edit" />
                     </IconButton>
 
                   </td>
                   <td className={classes}>
-                    <IconButton color='pink'>
-                      <i className="fas fa-trash" />
-                    </IconButton>
+                    <RemoveProduct id={_id} />
 
 
                   </td>
