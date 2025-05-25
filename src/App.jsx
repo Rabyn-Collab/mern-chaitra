@@ -7,6 +7,8 @@ import Login from './features/users/Login.jsx';
 import AdminPage from './features/admin/AdminPage.jsx';
 import ProductAdd from './features/admin/ProductAdd.jsx';
 import ProductUpdate from './features/admin/ProductUpdate.jsx';
+import Product from './features/products/Product.jsx';
+import CartPage from './features/carts/CartPage.jsx';
 
 
 export default function App() {
@@ -20,6 +22,9 @@ export default function App() {
         { index: true, element: <HomePage /> },
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
+
+        { path: 'products/:id', element: <Product /> },
+        { path: 'carts', element: <CartPage /> },
 
         { path: 'admin-panel', element: <AdminPage /> },
         { path: 'admin/add-product', element: <ProductAdd /> },

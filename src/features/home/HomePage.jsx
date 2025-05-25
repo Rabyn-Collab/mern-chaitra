@@ -1,10 +1,14 @@
+import ProductList from "../products/ProductList.jsx";
 
 export default function HomePage() {
+
   return (
-    <div className=' space-y-5'>
+    <>
+
+      <ProductList />
 
 
 
-    </div>
+    </>
   )
 }

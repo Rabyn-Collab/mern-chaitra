@@ -101,6 +101,10 @@ export default function ProfileMenu({ user }) {
                     nav('/admin-panel');
                     break;
 
+                  case "Carts":
+                    nav('/carts');
+                    break;
+
                 }
 
                 closeMenu();
