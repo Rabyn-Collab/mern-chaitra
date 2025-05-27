@@ -52,7 +52,7 @@ export default function ProductUpdate() {
           try {
             if (val.image) formData.append('image', val.image);
             await updateProduct({ body: formData, token: user.token, id: data._id }).unwrap();
-            toast.success('Product Added');
+            toast.success('product updated successfully');
             nav(-1);
           } catch (err) {
             toast.error(err.data.message || err.error);
