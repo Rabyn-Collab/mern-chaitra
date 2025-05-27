@@ -24,6 +24,29 @@ const userApi = mainApi.injectEndpoints({
     }),
 
 
+    getUserProfile: builder.query({
+      query: (token) => ({
+        url: '/users/profile',
+        method: "GET",
+        headers: {
+          Authorization: token
+        }
+      })
+    }),
+
+    updateUserProfile: builder.mutation({
+      query: (data) => ({
+        url: '/users/profile',
+        body: data.body,
+        method: "PATCH",
+        headers: {
+          Authorization: data.token
+        }
+      })
+    }),
+
+
+
   })
 
 
@@ -31,4 +54,4 @@ const userApi = mainApi.injectEndpoints({
 
 });
 
-export const { useUserLoginMutation, useUserRegisterMutation } = userApi;
+export const { useUserLoginMutation, useUserRegisterMutation, useGetUserProfileQuery, useUpdateUserProfileMutation } = userApi;

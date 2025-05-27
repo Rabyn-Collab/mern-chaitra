@@ -105,6 +105,10 @@ export default function ProfileMenu({ user }) {
                     nav('/carts');
                     break;
 
+                  case "Profile":
+                    nav('/user/profile');
+                    break;
+
                 }
 
                 closeMenu();

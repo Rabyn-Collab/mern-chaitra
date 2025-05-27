@@ -19,9 +19,12 @@ const orderApi = mainApi.injectEndpoints({
     }),
 
     getOrderDetail: builder.query({
-      query: (id) => ({
-        url: `/orders/${id}`,
-        method: 'GET'
+      query: (q) => ({
+        url: `/orders/${q.id}`,
+        method: 'GET',
+        headers: {
+          Authorization: q.token
+        }
       }),
       providesTags: ['Order']
     }),

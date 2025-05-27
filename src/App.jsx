@@ -9,6 +9,8 @@ import ProductAdd from './features/admin/ProductAdd.jsx';
 import ProductUpdate from './features/admin/ProductUpdate.jsx';
 import Product from './features/products/Product.jsx';
 import CartPage from './features/carts/CartPage.jsx';
+import ProfileMainPage from './features/users/ProfileMainPage.jsx';
+import OrderDetail from './features/orders/OrderDetail.jsx';
 
 
 export default function App() {
@@ -25,6 +27,9 @@ export default function App() {
 
         { path: 'products/:id', element: <Product /> },
         { path: 'carts', element: <CartPage /> },
+
+        { path: 'user/profile', element: <ProfileMainPage /> },
+        { path: 'user/orders/:id', element: <OrderDetail /> },
 
         { path: 'admin-panel', element: <AdminPage /> },
         { path: 'admin/add-product', element: <ProductAdd /> },
