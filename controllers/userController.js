@@ -51,4 +51,35 @@ export const userRegister = async (req, res) => {
 
   }
 
-} 
+}
+
+
+export const getUserProfile = async (req, res) => {
+  const id = req.userId;
+  try {
+    const user = await User.findById(id);
+    return res.status(200).json({
+      username: user.username,
+      email: user.email,
+      role: user.role
+    });
+  } catch (err) {
+    return res.status(400).json({ messgage: `${err}` });
+  }
+}
+
+
+export const updateProfile = async (req, res) => {
+  const { username, email } = req.body ?? {};
+  const id = req.userId;
+  try {
+    const user = await User.findById(id);
+    user.username = username || user.username;
+    user.email = email || user.email;
+    await user.save();
+    return res.status(200).json({ message: 'profile successfully updated' });
+
+  } catch (err) {
+    return res.status(400).json({ messgage: `${err}` });
+  }
+}
